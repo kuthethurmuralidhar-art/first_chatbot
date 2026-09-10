@@ -4,6 +4,24 @@ import streamlit as st
 NAME = "Dell"  # Put your name here
 EMAIL = "your.email@example.com"
 LINKEDIN = "https://linkedin.com"
+# --- SIDEBAR: PDF RESUME DOWNLOAD ---
+with st.sidebar:
+    st.header("📄 Quick Downloads")
+    try:
+        # Open and read the PDF file in binary mode
+        with open("resume.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        
+        # Create the download button
+        st.download_button(
+            label="📥 Download PDF Resume",
+            data=PDFbyte,
+            file_name="Dell_Oracle_DBA_Resume.pdf",
+            mime="application/octet-stream",
+        )
+        st.success("Resume loaded successfully!")
+    except FileNotFoundError:
+        st.warning("To enable downloads, place your 'resume.pdf' in the main project folder.")
 
 st.set_page_config(page_title=f"{NAME}'s Resume Bot", page_icon="💼")
 st.title(f"💼 {NAME}'s Career Assistant")
